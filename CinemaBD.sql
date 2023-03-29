@@ -276,7 +276,7 @@ ALTER TABLE `Client`
 
 
 
-//Триггер на каскадное удаление данных
+/*Триггер на каскадное удаление данных*/
 
 CREATE OR REPLACE FUNCTION delete_cinema_function()
 RETURNS TRIGGER AS $$
@@ -290,3 +290,8 @@ CREATE TRIGGER delete_cinema
 AFTER DELETE ON cinema
 FOR EACH ROW
 EXECUTE FUNCTION delete_cinema_function();
+
+
+
+/*Триггер на проверку данных*/
+
