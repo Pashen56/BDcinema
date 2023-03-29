@@ -471,3 +471,65 @@ JOIN film_director fd ON s.film_id = fd.film_id
 JOIN director d ON fd.director_id = d.id
 WHERE d.name = 'Стивен Спилберг'
 */
+
+
+
+
+
+/*Хранимая процедура для добавления нового фильма:*/
+
+CREATE OR REPLACE PROCEDURE add_movie(
+  p_MovieName text,
+  p_MovieLength time,
+  p_MovieReleaseYear text
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO Movies (MovieName, MovieLength, MovieReleaseYear)
+    VALUES (p_MovieName, p_MovieLength, p_MovieReleaseYear);
+END;
+$$;
+
+
+
+/*Хранимая процедура для удаления фильма по его id:*/
+
+CREATE OR REPLACE PROCEDURE delete_movie(
+    p_id_Movies serial
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM Movies WHERE id_Movies = p_id_Movies;
+END;
+$$;
+
+
+
+/*Хранимая процедура для добавления нового актера:*/
+
+CREATE OR REPLACE PROCEDURE add_actor(
+    p_ActorName text
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO Actors (ActorName)
+    VALUES (p_ActorName);
+END;
+$$;
+
+
+
+/*Хранимая процедура для удаления актера по его id:*/
+
+CREATE OR REPLACE PROCEDURE delete_actor(
+    p_id_Actors serial
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM Actors WHERE id_Actors = p_id_Actors;
+END;
+$$;
