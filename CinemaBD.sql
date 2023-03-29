@@ -3,7 +3,7 @@ SET time_zone = "+00:00";
 
 
 
-
+/*Создание таблиц*/
 
 CREATE TABLE `Cinemas` (
   `id_Cinemas` serial COLLATE utf8_unicode_ci NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE `BuyPlace` (
 
 
 
-
+/*Добавление ключей*/
 
 ALTER TABLE `Cinemas`
   ADD PRIMARY KEY (`id_Cinemas`);
@@ -221,9 +221,6 @@ ALTER TABLE `BuySessions`
   
 ALTER TABLE `BuyPlace`
   ADD PRIMARY KEY (`id_BuyPlace`);
-
-
-
 
 
 
@@ -389,3 +386,14 @@ CREATE TRIGGER check_data_BuyPlace
 BEFORE INSERT ON BuyPlace
 FOR EACH ROW
 EXECUTE FUNCTION check_data();
+
+
+
+/*Применение VIEW*/
+
+CREATE VIEW cinema_data AS
+SELECT Cinemas.id_Cinemas, Cinemas.CinemaName, CinemaHalls.id_CinemaHalls, CinemaHalls.HallCategory, Tickets.movie_id, Tickets.movie_name, Movies.id_Movies, Movies.MovieName
+FROM Cinemas
+JOIN CinemaHalls ON Cinemas.id_Cinemas = CinemaHalls.id_Cinemas
+JOIN Tickets ON CinemaHalls.id_CinemaHalls = Tickets.id_CinemaHalls
+JOIN Movies ON Tickets.id_Movies = Movies.id_Movies;
