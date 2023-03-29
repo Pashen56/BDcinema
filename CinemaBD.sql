@@ -271,3 +271,22 @@ ALTER TABLE `Sale`
 ALTER TABLE `Client`
   ADD CONSTRAINT `Client_ibfk_1` FOREIGN KEY (`id_Tickets`) REFERENCES `Tickets` (`id_Tickets`);
 
+
+
+
+
+
+//Триггер на каскадное удаление данных
+
+CREATE OR REPLACE FUNCTION delete_cinema_function()
+RETURNS TRIGGER AS $$
+BEGIN
+DELETE FROM CinemaHalls WHERE id_Cinemas = OLD.id;
+RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER delete_cinema
+AFTER DELETE ON cinema
+FOR EACH ROW
+EXECUTE FUNCTION delete_cinema_function();
