@@ -6,7 +6,7 @@ SET time_zone = "+00:00";
 
 
 CREATE TABLE `Cinemas` (
-  `id_Cinemas` int(3) COLLATE utf8_unicode_ci NOT NULL,
+  `id_Cinemas` serial COLLATE utf8_unicode_ci NOT NULL,
   `CinemaName` text COLLATE utf8_unicode_ci NOT NULL,
   `CinemaLocation` text COLLATE utf8_unicode_ci NOT NULL,
   `NumberOfHalls` varchar(3) COLLATE utf8_unicode_ci NOT NULL
@@ -14,8 +14,8 @@ CREATE TABLE `Cinemas` (
 
 
 CREATE TABLE `CinemaHalls` (
-  `id_CinemaHalls` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Cinemas` int(3) COLLATE utf8_unicode_ci NOT NULL,
+  `id_CinemaHalls` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Cinemas` serial COLLATE utf8_unicode_ci NOT NULL,
   `NumberOfHalls` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
   `NumberOfRows` int(3) COLLATE utf8_unicode_ci NOT NULL,
   `NumberOfPlaces` int(3) COLLATE utf8_unicode_ci NOT NULL,
@@ -24,16 +24,16 @@ CREATE TABLE `CinemaHalls` (
 
 
 CREATE TABLE `Sessions` (
-  `id_Sessions` int(3) COLLATE utf8_unicode_ci NOT NULL,
+  `id_Sessions` serial COLLATE utf8_unicode_ci NOT NULL,
   `SessionDate` date NOT NULL,
   `SessionTime` time NOT NULL,
-  `id_CinemaHalls` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Movies` int(3) COLLATE utf8_unicode_ci NOT NULL
+  `id_CinemaHalls` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Movies` serial COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `Movies` (
-  `id_Movies` int(3) COLLATE utf8_unicode_ci NOT NULL,
+  `id_Movies` serial COLLATE utf8_unicode_ci NOT NULL,
   `MovieName` text COLLATE utf8_unicode_ci NOT NULL,
   `MovieLength` time NOT NULL,
   `MovieReleaseYear` text COLLATE utf8_unicode_ci NOT NULL
@@ -41,17 +41,17 @@ CREATE TABLE `Movies` (
 
 
 CREATE TABLE `Tickets` (
-  `id_Tickets` int(4) COLLATE utf8_unicode_ci NOT NULL,
-  `id_CinemaHalls` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Sessions` int(3) NOT NULL,
-  `id_Places` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Movies` int(3) COLLATE utf8_unicode_ci NOT NULL
+  `id_Tickets` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_CinemaHalls` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Sessions` serial NOT NULL,
+  `id_Places` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Movies` serial COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `Places` (
-  `id_Places` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_CinemaHalls` int(3) COLLATE utf8_unicode_ci NOT NULL,
+  `id_Places` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_CinemaHalls` serial COLLATE utf8_unicode_ci NOT NULL,
   `Row` int(3) COLLATE utf8_unicode_ci NOT NULL,
   `Places` int(3) COLLATE utf8_unicode_ci NOT NULL,
   `PlacesCategory` text COLLATE utf8_unicode_ci NOT NULL,
@@ -60,76 +60,76 @@ CREATE TABLE `Places` (
 
 
 CREATE TABLE `Genres` (
-  `id_Genres` int(3) COLLATE utf8_unicode_ci NOT NULL,
+  `id_Genres` serial COLLATE utf8_unicode_ci NOT NULL,
   `GenreName` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `Actors` (
-  `id_Actors` int(3) COLLATE utf8_unicode_ci NOT NULL,
+  `id_Actors` serial COLLATE utf8_unicode_ci NOT NULL,
   `ActorName` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `ProducersCountry` (
-  `id_ProducersCountry` int(3) COLLATE utf8_unicode_ci NOT NULL,
+  `id_ProducersCountry` serial COLLATE utf8_unicode_ci NOT NULL,
   `Country` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `MovieGenre` (
-  `id_MovieGenre` int(4) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Movies` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Genres` int(3) COLLATE utf8_unicode_ci NOT NULL
+  `id_MovieGenre` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Movies` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Genres` serial COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `MovieActor` (
-  `id_MovieActor` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Movies` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Actors` int(3) COLLATE utf8_unicode_ci NOT NULL
+  `id_MovieActor` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Movies` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Actors` serial COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `MovieProducersCountry` (
-  `id_MovieProducersCountry` int(4) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Movies` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_ProducersCountry` int(3) COLLATE utf8_unicode_ci NOT NULL
+  `id_MovieProducersCountry` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Movies` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_ProducersCountry` serial COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `Sale` (
-  `id_Sale` int(4) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Movies` int(3) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Client` int(4) COLLATE utf8_unicode_ci NOT NULL
+  `id_Sale` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Movies` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Client` serial COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `Client` (
-  `id_Client` int(4) COLLATE utf8_unicode_ci NOT NULL,
+  `id_Client` serial COLLATE utf8_unicode_ci NOT NULL,
   `ClientName` text COLLATE utf8_unicode_ci NOT NULL,
-  `id_Tickets` int(4) COLLATE utf8_unicode_ci NOT NULL,
+  `id_Tickets` serial COLLATE utf8_unicode_ci NOT NULL,
   `Booking` boolean COLLATE utf8_unicode_ci NOT NULL,
   `Sold` boolean COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `BuyMovie` (
-  `id_BuyMovie` int(4) COLLATE utf8_unicode_ci NOT NULL,
+  `id_BuyMovie` serial COLLATE utf8_unicode_ci NOT NULL,
   `BuyMovieClientName` text COLLATE utf8_unicode_ci NOT NULL,
-  `id_Movies` int(3) COLLATE utf8_unicode_ci NOT NULL
+  `id_Movies` serial COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `BuySessions` (
-  `id_BuySessions` int(4) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Sessions` int(3) COLLATE utf8_unicode_ci NOT NULL
+  `id_BuySessions` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Sessions` serial COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE `BuyPlace` (
-  `id_BuyPlace` int(4) COLLATE utf8_unicode_ci NOT NULL,
-  `id_Places` int(3) COLLATE utf8_unicode_ci NOT NULL
+  `id_BuyPlace` serial COLLATE utf8_unicode_ci NOT NULL,
+  `id_Places` serial COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
