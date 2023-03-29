@@ -295,3 +295,97 @@ EXECUTE FUNCTION delete_cinema_function();
 
 /*Триггер на проверку данных*/
 
+CREATE OR REPLACE FUNCTION check_data()
+RETURNS TRIGGER AS $$
+BEGIN
+IF NEW.column_name IS NULL THEN
+RAISE EXCEPTION 'column_name cannot be null';
+END IF;
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_data_Cinemas
+BEFORE INSERT ON Cinemas
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_CinemaHalls
+BEFORE INSERT ON CinemaHalls
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_Sessions
+BEFORE INSERT ON Sessions
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_Movies
+BEFORE INSERT ON Movies
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_Tickets
+BEFORE INSERT ON Tickets
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_Places
+BEFORE INSERT ON Places
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_Genres
+BEFORE INSERT ON Genres
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_Actors
+BEFORE INSERT ON Actors
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_ProducersCountry
+BEFORE INSERT ON ProducersCountry
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_MovieGenre
+BEFORE INSERT ON MovieGenre
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_MovieActor
+BEFORE INSERT ON MovieActor
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_MovieProducersCountry
+BEFORE INSERT ON MovieProducersCountry
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_Sale
+BEFORE INSERT ON Sale
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_Client
+BEFORE INSERT ON Client
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_BuyMovie
+BEFORE INSERT ON BuyMovie
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_BuySessions
+BEFORE INSERT ON BuySessions
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
+
+CREATE TRIGGER check_data_BuyPlace
+BEFORE INSERT ON BuyPlace
+FOR EACH ROW
+EXECUTE FUNCTION check_data();
