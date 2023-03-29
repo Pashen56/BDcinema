@@ -533,3 +533,35 @@ BEGIN
     DELETE FROM Actors WHERE id_Actors = p_id_Actors;
 END;
 $$;
+
+
+
+
+
+/*Роли и политики доступа*/
+
+-- Создание роли администратора
+CREATE ROLE admin LOGIN PASSWORD 'admin123';
+
+-- Предоставление доступа админу к базе данных
+GRANT ALL PRIVILEGES ON DATABASE cinemaBD TO admin;
+
+-- Предоставление доступа админу ко всем таблицам в схеме public
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin;
+
+-- Создание роли пользователя
+CREATE ROLE user LOGIN PASSWORD 'user123';
+
+-- Предоставление соединения пользователя к базе данных
+GRANT CONNECT ON DATABASE CinemaBD TO user;
+
+-- Предоставление доступа пользователю для выполнения запросов SELECT
+GRANT SELECT ON Cinemas, Movies, Sessions, CinemaHalls, Places, Actors TO user;
+
+-- Обеспечивает безопасность, чтобы пользователи могли смотреть только свои билеты
+ALTER TABLE Tickets ENABLE ROW LEVEL SECURITY;
+CREATE POLICY tickets_policy ON Tickets FOR SELECT USING (id_Tickets = current_user);
+
+-- Обеспечивает безопасность, чтобы пользователи могли смотреть только доступные сеансы
+ALTER TABLE Sessions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY sessions_policy ON Sessions FOR SELECT USING (SessionDate >= current_date AND SessionTime >= current_time );
