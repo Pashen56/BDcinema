@@ -565,3 +565,30 @@ CREATE POLICY tickets_policy ON Tickets FOR SELECT USING (id_Tickets = current_u
 -- Обеспечивает безопасность, чтобы пользователи могли смотреть только доступные сеансы
 ALTER TABLE Sessions ENABLE ROW LEVEL SECURITY;
 CREATE POLICY sessions_policy ON Sessions FOR SELECT USING (SessionDate >= current_date AND SessionTime >= current_time );
+
+
+
+
+
+/*Наследование таблиц*/
+
+CREATE TABLE `Movies2` (
+  Description text
+) INHERITS(Movies);
+
+
+
+
+
+/*Секционирование таблиц*/
+
+CREATE TABLE logs (
+    log_date DATE NOT NULL,
+    log_data TEXT NOT NULL
+) PARTITION BY RANGE (EXTRACT(MONTH FROM log_date));
+
+CREATE TABLE logs_1 PARTITION OF logs
+    FOR VALUES FROM (MINVALUE) TO (2);
+
+CREATE TABLE logs_2 PARTITION OF logs
+    FOR VALUES FROM (2) TO (4);
