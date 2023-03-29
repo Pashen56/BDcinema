@@ -133,14 +133,6 @@ CREATE TABLE `BuyPlace` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-/*CREATE TABLE `kinoteatri` (
-  `NameKinoteatra` text COLLATE utf8_unicode_ci NOT NULL,
-  `PlaceKinoteatra` text COLLATE utf8_unicode_ci NOT NULL,
-  `AmountKinoteatrov` int(2) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-INSERT INTO `kinoteatri` (`NameKinoteatra`, `PlaceKinoteatra`, `AmountKinoteatrov`) VALUES
-('56', 'Yangilya', '5');*/
 
 
 
