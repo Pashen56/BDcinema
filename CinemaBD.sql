@@ -414,13 +414,13 @@ WHERE Sessions.SessionTime >= NOW() - INTERVAL '1 MONTH';
 /*Запрос 2. Получить список всех кинотеатров и количество фильмов, которые были показаны в каждом кинотеатре за последний месяц:*/
 
 /*
-SELECT cinema.cinema_name, COUNT(DISTINCT movie.movie_id) AS number_of_movies
-FROM cinema
-JOIN hall ON cinema.cinema_id = hall.cinema_id
-JOIN movie ON hall.hall_id = movie.hall_id
-JOIN sessions ON movie.movie_id = sessions.movie_id
-WHERE sessions.session_time >= NOW() - INTERVAL '1 MONTH'
-GROUP BY cinema.cinema_name;
+SELECT Cinemas.CinemaName, COUNT(DISTINCT Movies.id_Movies) AS number_of_movies
+FROM Cinemas
+JOIN CinemaHalls ON Cinemas.id_Cinemas = CinemaHalls.id_Cinemas
+JOIN Sessions ON CinemaHalls.id_CinemaHalls = Sessions.id_CinemaHalls
+JOIN Movies ON Sessions.id_Movies = Movies.id_Movies
+WHERE Sessions.SessionTime >= NOW() - INTERVAL '1 MONTH'
+GROUP BY Cinemas.CinemaName;
 */
 
 
