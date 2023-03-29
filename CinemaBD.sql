@@ -397,3 +397,39 @@ FROM Cinemas
 JOIN CinemaHalls ON Cinemas.id_Cinemas = CinemaHalls.id_Cinemas
 JOIN Tickets ON CinemaHalls.id_CinemaHalls = Tickets.id_CinemaHalls
 JOIN Movies ON Tickets.id_Movies = Movies.id_Movies;
+
+
+
+/*Запрос 1. Получить список всех фильмов, которые были показаны в кинотеатре за последний месяц:*/
+
+/*
+SELECT Movies.MovieName, Sessions.SessionTime
+FROM Movies
+JOIN Sessions ON Movies.id_Movies = Sessions.id_Movies
+WHERE Sessions.SessionTime >= NOW() - INTERVAL '1 MONTH';
+*/
+
+
+
+/*Запрос 2. Получить список всех кинотеатров и количество фильмов, которые были показаны в каждом кинотеатре за последний месяц:*/
+
+/*
+SELECT cinema.cinema_name, COUNT(DISTINCT movie.movie_id) AS number_of_movies
+FROM cinema
+JOIN hall ON cinema.cinema_id = hall.cinema_id
+JOIN movie ON hall.hall_id = movie.hall_id
+JOIN sessions ON movie.movie_id = sessions.movie_id
+WHERE sessions.session_time >= NOW() - INTERVAL '1 MONTH'
+GROUP BY cinema.cinema_name;
+*/
+
+
+
+/*Запрос 3. :*/
+
+/*
+SELECT movie.movie_name, sessions.session_time
+FROM movie
+JOIN sessions ON movie.movie_id = sessions.movie_id
+WHERE sessions.session_time >= NOW() - INTERVAL '1 MONTH';
+*/
