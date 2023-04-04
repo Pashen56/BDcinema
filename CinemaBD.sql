@@ -580,6 +580,9 @@ CREATE OR REPLACE FUNCTION delete_cinema_function()
 RETURNS TRIGGER AS $$
 BEGIN
 DELETE FROM CinemaHalls WHERE id_Cinemas = OLD.id;
+DELETE FROM Sessions WHERE id_CinemaHalls = OLD.id;
+DELETE FROM Tickets WHERE id_CinemaHalls = OLD.id;
+DELETE FROM Places WHERE id_CinemaHalls = OLD.id;
 RETURN OLD;
 END;
 $$ LANGUAGE plpgsql;
