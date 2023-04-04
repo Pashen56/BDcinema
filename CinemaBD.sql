@@ -840,6 +840,104 @@ $$;
 
 
 
+/*Хранимая процедура для добавления нового билета:*/
+
+CREATE OR REPLACE PROCEDURE add_ticket(
+  p_id_CinemaHalls serial,
+  p_id_Sessions serial,
+  p_id_Places serial,
+  p_id_Movies serial
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO Tickets (p_id_CinemaHalls, p_id_Sessions, p_id_Places, p_id_Movies)
+    VALUES (p_id_CinemaHalls, p_id_Sessions, p_id_Places, p_id_Movies);
+END;
+$$;
+
+
+
+/*Хранимая процедура для удаления билета по его id:*/
+
+CREATE OR REPLACE PROCEDURE delete_ticket(
+    p_id_Tickets serial
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM Tickets WHERE id_Tickets = p_id_Tickets;
+END;
+$$;
+
+
+
+/*Хранимая процедура для добавления нового сеанса:*/
+
+CREATE OR REPLACE PROCEDURE add_session(
+  p_SessionDate date,
+  p_SessionTime time,
+  p_id_CinemaHalls serial,
+  p_id_Movies serial
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO Sessions (SessionDate, SessionTime, id_CinemaHalls, id_Movies)
+    VALUES (p_SessionDate, p_SessionTime, p_id_CinemaHalls, p_id_Movies);
+END;
+$$;
+
+
+
+/*Хранимая процедура для удаления сеанса по его id:*/
+
+CREATE OR REPLACE PROCEDURE delete_session(
+    p_id_Sessions serial
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM Sessions WHERE id_Sessions = p_id_Sessions;
+END;
+$$;
+
+
+
+/*Хранимая процедура для добавления нового клиента:*/
+
+CREATE OR REPLACE PROCEDURE add_client(
+  p_ClientName text,
+  p_id_Tickets serial,
+  p_Booking boolean,
+  p_Sold boolean
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO Client (ClientName, id_Tickets, Booking, Sold)
+    VALUES (p_ClientName, p_id_Tickets, p_Booking, p_Sold);
+END;
+$$;
+
+
+
+/*Хранимая процедура для добавления новой продажи:*/
+
+CREATE OR REPLACE PROCEDURE add_sale(
+  p_id_Movies serial,
+  p_id_Client serial
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO Sale (id_Movies, id_Client)
+    VALUES (p_id_Movies, p_id_Client);
+END;
+$$;
+
+
+
 
 
 /*Роли и политики доступа*/
