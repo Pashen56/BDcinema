@@ -952,6 +952,9 @@ CREATE TABLE `BusinessCinemaHalls` (
 
 CREATE TABLE logs (
     log_date DATE NOT NULL,
+    id_Client serial NOT NULL,
+    id_Tickets serial NOT NULL,
+    id_Sale serial NOT NULL,
     log_data TEXT NOT NULL
 ) PARTITION BY RANGE (EXTRACT(MONTH FROM log_date));
 
