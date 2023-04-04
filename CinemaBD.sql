@@ -729,53 +729,6 @@ GROUP BY Cinemas.CinemaName;
 
 
 
-/*
-Запрос 1: Получить список всех фильмов, которые были показаны в кинотеатре с именем “Космос” в 2022 году, отсортированных по дате и времени сеанса.
-SELECT f.title, s.date, s.time
-FROM film f
-JOIN session s ON f.id = s.film_id
-JOIN cinema c ON s.cinema_id = c.id
-WHERE c.name = 'Космос' AND s.date BETWEEN '2022-01-01' AND '2022-12-31'
-ORDER BY s.date, s.time;
-Запрос 2: Получить список всех актеров, которые снимались в фильмах жанра “комедия” или “мюзикл”, и количество таких фильмов для каждого актера.
-SELECT a.name, COUNT(DISTINCT f.id) AS num_films
-FROM actor a
-JOIN film_actor fa ON a.id = fa.actor_id
-JOIN film f ON fa.film_id = f.id
-JOIN film_genre fg ON f.id = fg.film_id
-JOIN genre g ON fg.genre_id = g.id
-WHERE g.name IN ('комедия', 'мюзикл')
-GROUP BY a.name;
-Запрос 3: Получить список всех зрителей, которые посмотрели больше 10 разных фильмов в 2022 году, и средний рейтинг, который они поставили этим фильмам.
-SELECT v.name, AVG(r.rating) AS avg_rating
-FROM viewer v
-JOIN review r ON v.id = r.viewer_id
-JOIN session s ON r.session_id = s.id
-WHERE s.date BETWEEN '2022-01-01' AND '2022-12-31'
-GROUP BY v.name
-HAVING COUNT(DISTINCT s.film_id) > 10;
-Запрос 4: Получить список всех режиссеров, которые сняли хотя бы один фильм жанра “ужасы”, и общую сумму бюджетов их фильмов.
-SELECT d.name, SUM(f.budget) AS total_budget
-FROM director d
-JOIN film_director fd ON d.id = fd.director_id
-JOIN film f ON fd.film_id = f.id
-JOIN film_genre fg ON f.id = fg.film_id
-JOIN genre g ON fg.genre_id = g.id
-WHERE g.name = 'ужасы'
-GROUP BY d.name;
-Запрос 5: Получить список всех фильмов, которые имеют рейтинг выше 8 на сайте КиноПоиск и выше 7 на сайте IMDb, и разницу между этими рейтингами.
-SELECT f.title, f.rating_kp, f.rating_imdb, ABS(f.rating_kp - f.rating_imdb) AS rating_diff
-FROM film f
-WHERE f.rating_kp > 8 AND f.rating_imdb > 7;
-Запрос 6: Получить список всех кинотеатров, которые показывают фильмы режиссера Стивена Спилберга в 2022 году, и количество таких фильмов для каждого кинотеатра.
-SELECT c.name, COUNT(DISTINCT s.film_id) AS num_films
-FROM cinema c
-JOIN session s ON c.id = s.cinema_id
-JOIN film_director fd ON s.film_id = fd.film_id
-JOIN director d ON fd.director_id = d.id
-WHERE d.name = 'Стивен Спилберг'
-*/
-
 
 
 
