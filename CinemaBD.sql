@@ -606,6 +606,16 @@ RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION check_date()
+RETURNS TRIGGER AS $$
+BEGIN
+IF NEW.SessionDate < current_date THEN
+RAISE EXCEPTION 'Session Date cannot be like this';
+END IF;
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
 CREATE TRIGGER check_data_Cinemas
 BEFORE INSERT ON Cinemas
 FOR EACH ROW
@@ -619,7 +629,7 @@ EXECUTE FUNCTION check_data();
 CREATE TRIGGER check_data_Sessions
 BEFORE INSERT ON Sessions
 FOR EACH ROW
-EXECUTE FUNCTION check_data();
+EXECUTE FUNCTION check_data(), check_date();
 
 CREATE TRIGGER check_data_Movies
 BEFORE INSERT ON Movies
