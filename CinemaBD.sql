@@ -904,14 +904,26 @@ GRANT ALL PRIVILEGES ON DATABASE cinemaBD TO admin;
 -- Предоставление доступа админу ко всем таблицам в схеме public
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin;
 
+-- Создание роли суперпользоателя
+CREATE ROLE superuser LOGIN PASSWORD 'superuser123';
+
+-- Предоставление соединения суперпользователя к базе данных
+GRANT CONNECT ON DATABASE cinemaBD TO superuser;
+
+-- Предоставление доступа суперпользователю для выполнения запросов
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO superuser;
+GRANT INSERT, UPDATE ON Actors, Client, Genres, Movies, Places, ProducersCountry, Sessions, MovieProducersCountry, MovieActor, MovieGenre TO superuser;
+GRANT DELETE ON Tickets, Sessions TO superuser;
+
 -- Создание роли пользователя
 CREATE ROLE user LOGIN PASSWORD 'user123';
 
 -- Предоставление соединения пользователя к базе данных
 GRANT CONNECT ON DATABASE CinemaBD TO user;
 
--- Предоставление доступа пользователю для выполнения запросов SELECT
-GRANT SELECT ON Cinemas, Movies, Sessions, CinemaHalls, Places, Actors TO user;
+-- Предоставление доступа пользователю для выполнения запросов
+GRANT SELECT ON Cinemas, Movies, Sessions, CinemaHalls, Places, Actors, ProducersCountry, MovieProducersCountry, MovieActor, MovieGenre TO user;
+GRANT INSERT ON Tickets TO user;
 
 -- Обеспечивает безопасность, чтобы пользователи могли смотреть только свои билеты
 ALTER TABLE Tickets ENABLE ROW LEVEL SECURITY;
@@ -927,9 +939,10 @@ CREATE POLICY sessions_policy ON Sessions FOR SELECT USING (SessionDate >= curr
 
 /*Наследование таблиц*/
 
-CREATE TABLE `Movies2` (
+CREATE TABLE `BusinessCinemaHalls` (
   Description text
-) INHERITS(Movies);
+) INHERITS(CinemaHalls);
+
 
 
 
