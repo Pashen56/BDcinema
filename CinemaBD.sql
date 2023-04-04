@@ -696,7 +696,7 @@ EXECUTE FUNCTION check_data();
 /*Применение VIEW*/
 
 CREATE VIEW cinema_data AS
-SELECT Cinemas.id_Cinemas, Cinemas.CinemaName, CinemaHalls.id_CinemaHalls, CinemaHalls.HallCategory, Tickets.movie_id, Tickets.movie_name, Movies.id_Movies, Movies.MovieName
+SELECT Cinemas.id_Cinemas, Cinemas.CinemaName, CinemaHalls.id_CinemaHalls, CinemaHalls.HallCategory, Tickets.id_Movies, Movies.MovieName
 FROM Cinemas
 JOIN CinemaHalls ON Cinemas.id_Cinemas = CinemaHalls.id_Cinemas
 JOIN Tickets ON CinemaHalls.id_CinemaHalls = Tickets.id_CinemaHalls
